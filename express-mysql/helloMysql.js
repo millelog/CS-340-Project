@@ -6,11 +6,11 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 3000);
+app.set('port', 3322);
 
 app.get('/',function(req,res,next){
   var context = {};
-  mysql.pool.query('SELECT * FROM todo', function(err, rows, fields){
+  mysql.pool.query('SELECT * FROM phones', function(err, rows, fields){
     if(err){
       next(err);
       return;
