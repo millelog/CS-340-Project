@@ -13,7 +13,7 @@ app.get('/',function(req,res,next){
 });
 
 app.get('/newOrder', function(req,res,next){
-  res.render(x)
+  res.render('newOrder')
 });
 
 app.get('/newCustomer',function(req,res,next){
