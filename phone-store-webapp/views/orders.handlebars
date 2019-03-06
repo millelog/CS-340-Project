@@ -1,0 +1,26 @@
+<html>
+{{#each foo}}
+{{this}}
+{{/each}}
+<h3>Orders</h3>
+<table>
+	<thead>
+		<th>Order ID</th>
+		<th>Name</th>
+		<th>Date</th>
+	</thead>
+	<tbody>
+		{{#each order}}
+		<tr>
+			<td>{{Order_ID}}</td>
+			<td>{{Cust_Name}}</td>
+			<td>{{Order_Date}}</td>
+			<!-- TODO: function to view that order  -->
+			<td><button onclick="">View</button></td>		
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+<!-- TODO: form to add a new order -->
+</html>
