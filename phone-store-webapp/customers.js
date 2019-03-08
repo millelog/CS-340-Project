@@ -23,7 +23,6 @@ module.exports = function() {
 	router.get('/', (req,res)=>{
 		var callbackCount = 0;
 		var context = {};		//object that will store sql results
-		context.test = 'suhDudde';
 		context.jsscripst = [];
 
 		var mysql = req.app.get('mysql');
