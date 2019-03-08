@@ -34,11 +34,14 @@
 
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
+
+
 <!-- search for employees -->
 <h4>Search For Employee</h4>
 <p style="color: red">Work in progress</p>
-<!-- display employees -->
 
+
+<!-- display employees -->
 <h4>Display Employees</h4>
 
 <table class="table">
@@ -52,12 +55,12 @@
 		<tbody>
 			{{#each employees}}
 			<tr>
-				<td>{{EMP_Name}}</td>
+				<td>{{Emp_Name}}</td>
 				<td>{{Store_ID}}</td>
-				<td>{{EMP_Phone_Number}}</td>
-				<td>{{EMP_Address_Street}}</td>
+				<td>{{Emp_Phone_Number}}</td>
+				<td>{{Emp_Address_Street}}</td>
 				<td>{{Emp_Address_Zip}}</td>		
-				<!-- All attributes for employees start with EMP except for zip, starts with Emp -->
+			
 			</tr>
 			{{/each}}
 		</tbody>
