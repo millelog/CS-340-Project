@@ -36,10 +36,15 @@ module.exports = function(){
 		});
 	}
 	
-
+	/*
+		function that renders orders.handlebars
+		currently, the only javascript function is getOrders.
+		if more is added, increase if(callbackCount) requirement
+		to match the number of functions called
+	*/
 	router.get('/', (req,res)=>{
 		var callbackCount = 0;
-		var context = {};
+		var context = {};		//object that will store sql results
 		context.jsscripts = [];
 
 		var mysql = req.app.get('mysql');
