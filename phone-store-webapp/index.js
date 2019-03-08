@@ -23,7 +23,7 @@ app.use('/customers', require('./customers.js'));
 app.use('/employees', require('./employees.js'));
 // app.use('/stores', require('./stores.js'));
 // app.use('/phones', require('./phones.js'));
-// app.use('/service_plans', require('./service_plans.js'));
+app.use('/service_plans', require('./service_plans.js'));
 
 app.use((req,res)=>{
 	res.status(404);

@@ -1,1 +1,49 @@
-service plans
+<html>{{#each foo}}
+{{this}}
+{{/each}}
+
+<div>
+	<p>
+		This page allows the phone store employees (manager) to add new service plans to the database, and look up an existing service plan to find its cost and description.
+	</p>
+</div>
+
+<h3>Service Plans</h3>
+<!-- add new service plan -->
+<h4>Add New Employee to DB</h4>
+<form action="/service_plans" method="post">
+		<div class="form-group">
+			Name: <input type="text" name="plan_name" placeholder="Name" required="true">
+		</div>
+		<div class="form-group">
+		   Cost: $<input type="number" name="plan_cost", required="true">
+		</div>
+		<div class="form-group">
+			Plan Description: <textarea name="plan_desc", required="true">
+		</div>
+
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+<!-- display service plans -->
+
+<h4>Display Service Plans</h4>
+
+<table class="table">
+		<thead>
+			<th scope="col">Name</th>
+			<th scope="col">Store ID</th>
+			<th scope="col">Phone Number</th>
+		</thead>
+		<tbody>
+			{{#each service_plans}}
+			<tr>
+				<td>{{Plan_Name}}</td>
+				<td>{{Plan_Cost}}</td>
+				<td>{{Plan_Desc}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+
+
+</html>	
