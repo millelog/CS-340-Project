@@ -1,1 +1,53 @@
-stores
+<html>
+{{#each foo}}
+{{this}}
+{{/each}}
+
+<div>
+	<p>
+		This page allows phones store employees to see list of stores and view the employees for each store.
+	</p>
+</div>
+
+<h3>Stores</h3>
+<!-- form to add new store -->
+	<h4>Add New Store</h4>
+	<form action="/stores" method="post">
+		<div class="form-group">
+			Phone Number: <input type="tel" name="Store_Phone_Number" placeholder="(XXX) XXX - XXXX" required="true">
+		</div>
+		<div class="form-group">
+			Street Address: <input type="text" name="Store_Address_Street" placeholder="123 Main St" required="true">
+		</div>
+		<div class="form-group">
+			Zip Code: <input type="number" name="Store_Address_Zip" placeholder="11223" required="true">
+		</div>
+
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+
+<!-- display current stores -->
+<h4>Display Stores</h4>
+<table class="table">
+		<thead>
+			<th scope="col">Store ID</th>
+			<th scope="col">Phone Number</th>
+			<th scope="col">Street Address</th>
+			<th scope="col">Zip Code</th>
+		</thead>
+		<tbody>
+			{{#each stores}}
+			<tr>
+				<td>{{Store_ID}}</td>
+				<td>{{Store_Phone_Number}}</td>
+				<td>{{Store_Address_Street}}</td>
+				<td>{{Store_Address_Zip}}</td>		
+				<!-- All attributes for employees start with EMP except for zip, starts with Emp -->
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+
+
+
+</html>

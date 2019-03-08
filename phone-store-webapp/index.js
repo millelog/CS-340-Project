@@ -21,7 +21,7 @@ app.use('/static', express.static('public'));
 app.use('/orders', require('./orders.js'));
 app.use('/customers', require('./customers.js'));
 app.use('/employees', require('./employees.js'));
-// app.use('/stores', require('./stores.js'));
+app.use('/stores', require('./stores.js'));
 // app.use('/phones', require('./phones.js'));
 // app.use('/service_plans', require('./service_plans.js'));
 
