@@ -17,7 +17,7 @@ module.exports = function(){
 		function gets employees from db
 	*/
 	function getEmployees(res,mysql,context,complete){
-		mysql.pool.query("SELECT Employees.EMP_Name, Employees.Store_ID, Employees.EMP_Phone_Number, Employees.EMP_Address_Street, Employees.Emp_Address_Zip FROM Employees",(error,results,fields)=>{
+		mysql.pool.query("SELECT Employees.Emp_Name, Employees.Store_ID, Employees.Emp_Phone_Number, Employees.Emp_Address_Street, Employees.Emp_Address_Zip FROM Employees",(error,results,fields)=>{
 			if(error){
 				res.write(JSON.stringify(error));
 				res.end();
@@ -57,8 +57,8 @@ module.exports = function(){
 	router.post('/', (req,res)=>{
 		console.log(req.body)
 		var mysql = req.app.get('mysql');
-		var sql = "insert into Employees (EMP_Name, Store_ID, EMP_Phone_Number, EMP_Address_Street, Emp_Address_Zip) values (?,?,?,?,?)";
-		var inserts = [req.body.EMP_Name, req.body.Store_ID, req.body.EMP_Phone_Number, req.body.EMP_Address_Street, req.body.Emp_Address_Zip];
+		var sql = "insert into Employees (Emp_Name, Store_ID, Emp_Phone_Number, Emp_Address_Street, Emp_Address_Zip) values (?,?,?,?,?)";
+		var inserts = [req.body.Emp_Name, req.body.Store_ID, req.body.Emp_Phone_Number, req.body.Emp_Address_Street, req.body.Emp_Address_Zip];
 
 		sql = mysql.pool.query(sql,inserts,(error,results,fields)=>{
 			if(error){
