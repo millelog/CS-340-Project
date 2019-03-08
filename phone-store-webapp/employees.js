@@ -29,7 +29,7 @@ module.exports = function(){
 
 
 	/*
-		function renders customers.handlebars
+		function renders employees.handlebars
 	*/
 	router.get('/', (req,res)=>{
 		var callbackCount = 0;
