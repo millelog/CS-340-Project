@@ -1,1 +1,32 @@
-customers
+
+<html>
+{{#each foo}}
+{{this}}
+{{/each}}
+<h3>Customers</h3>
+
+	<h3>Add New Customer</h3>
+	<!-- form to add new customer -->
+	<form>
+		<div class="form-group">
+			Name: <input type="text" name="Cust_Name" placeholder="Name">
+		</div>
+		<div class="form-group">
+			Email: <input type="email" name="Cust_Email" placeholder="email@email.com">
+		</div>
+		<div>
+			Phone Number: <input type="tel" name="Cust_Phone_Number" placeholder="(XXX) XXX - XXXX">
+		</div>
+		<div>
+			Street Address: <input type="text" name="Cust_Address_Street" placeholder="123 Main St">
+		</div>
+		<div>
+			Zip Code: <input type="number" name="Cust_Address_Zip" placeholder="11223">
+		</div>
+	</form>
+	<!-- form to search for exisiting customer -->
+
+	<!-- for project purposes, display table of customers also -->
+{{test}}
+
+</html>
