@@ -1,1 +1,37 @@
-phones
+<html>
+{{#each foo}}
+{{this}}
+{{/each}}
+
+<div>
+	<p>
+		This page allows management of the phone database (Phones_Infos table)
+	</p>
+
+	<h3>Phones</h3>
+	<!-- Form to add new phone -->
+	<!-- Search/filter for phone -->
+	<!-- Display phones in db -->
+	<table>
+	<thead>
+		<th>SKU</th>
+		<th>Manufacturer</th>
+		<th>Model</th>
+		<th>Phone Name</th>
+		<th>Phone Price</th>
+	</thead>
+	<tbody>
+		{{#each phones}}
+		<tr>
+			<td>{{SKU}}</td>
+			<td>{{Manufacturer}}</td>
+			<td>{{Model}}</td>
+			<td>{{Phone_Name}}</td>
+			<td>{{Phone_Price}}</td>
+			<!-- TODO: function to view that phone  -->
+			<!-- <td><button onclick="">Update</button></td>		 -->
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+</div>
