@@ -6,7 +6,7 @@ module.exports = function(){
 		function gets service plans from db
 	*/
 	function getServicePlans(res,mysql,context,complete){
-		mysql.pool.query("SELECT ServicePlans.Plan_Name, ServicePlans.Plan_Cost, ServicePlans.Plan_Desc",(error,results,fields)=>{
+		mysql.pool.query("SELECT ServicePlans.Plan_ID, ServicePlans.Plan_Name, ServicePlans.Plan_Cost, ServicePlans.Plan_Desc from ServicePlans",(error,results,fields)=>{
 			if(error){
 				res.write(JSON.stringify(error));
 				res.end();
@@ -32,7 +32,7 @@ module.exports = function(){
 
 		function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 1){
                 res.render('service_plans', context);
             }
 		}
@@ -45,8 +45,9 @@ module.exports = function(){
 	router.post('/', (req,res)=>{
 		console.log(req.body)
 		var mysql = req.app.get('mysql');
-		var sql = "insert into ServicePlans (Plan_Name, Plan_Cost, Plan_Desc) values (?,?,?)";
-		var inserts = [req.body.plan_name, req.body.plan_cost, req.body.plan_desc];
+		
+		var sql = "INSERT INTO ServicePlans(Plan_Name, Plan_Cost,  Plan_Desc) VALUES (?,?,?)";
+		var inserts = [req.body.Plan_Name, req.body.Plan_Cost, req.body.Plan_Desc];
 
 		sql = mysql.pool.query(sql,inserts,(error,results,fields)=>{
 			if(error){

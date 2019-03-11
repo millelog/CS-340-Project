@@ -10,16 +10,16 @@
 
 <h3>Service Plans</h3>
 <!-- add new service plan -->
-<h4>Add New Employee to DB</h4>
+<h4>Add New Service Plan to DB</h4>
 <form action="/service_plans" method="post">
 		<div class="form-group">
-			Name: <input type="text" name="plan_name" placeholder="Name" required="true">
+			Name: <input type="text" name="Plan_Name" placeholder="Name" required="true">
 		</div>
 		<div class="form-group">
-		   Cost: $<input type="number" name="plan_cost", required="true">
+		   Cost: $<input type="number" name="Plan_Cost", required="true">
 		</div>
 		<div class="form-group">
-			Plan Description: <textarea name="plan_desc", required="true">
+			Plan Description: <input type="text" name="Plan_Desc", required="true">
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
@@ -30,13 +30,15 @@
 
 <table class="table">
 		<thead>
+			<th scope="col">Plan ID</th>
 			<th scope="col">Name</th>
-			<th scope="col">Store ID</th>
-			<th scope="col">Phone Number</th>
+			<th scope="col">Cost</th>
+			<th scope="col">Description</th>
 		</thead>
 		<tbody>
 			{{#each service_plans}}
 			<tr>
+				<td>{{Plan_ID}}</td>
 				<td>{{Plan_Name}}</td>
 				<td>{{Plan_Cost}}</td>
 				<td>{{Plan_Desc}}</td>
