@@ -8,17 +8,27 @@
 		This page allows management of the phone database (Phones_Infos table)
 	</p>
 
-	<h3>Phones</h3>
+	<h3>Phones</h3>   
 	<!-- Form to add new phone -->
+	<h4>Add New Phone to DB</h4>
+	<form action="/phones" method="post">
+		<div class="form-group">SKU: <input type="number" name="SKU" required="true"></div>
+		<div class="form-group">Manufacturer: <input type="text" name="Manufacturer" required="true"></div>
+		<div class="form-group">Model: <input type="text" name="Model" required="true"></div>
+		<div class="form-group">Name: <input type="text" name="Phone_Name"></div>
+		<div class="form-group">Price: <input type="number" name="Phone_Price"></div>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
 	<!-- Search/filter for phone -->
 	<!-- Display phones in db -->
-	<table>
-	<thead>
-		<th>SKU</th>
-		<th>Manufacturer</th>
-		<th>Model</th>
-		<th>Phone Name</th>
-		<th>Phone Price</th>
+	<table class="table">
+	<thead >
+		<th scope="col">SKU</th>
+		<th scope="col">Manufacturer</th>
+		<th scope="col">Model</th>
+		<th scope="col">Phone Name</th>
+		<th scope="col">Phone Price</th>
+
 	</thead>
 	<tbody>
 		{{#each phones}}
@@ -28,6 +38,8 @@
 			<td>{{Model}}</td>
 			<td>{{Phone_Name}}</td>
 			<td>{{Phone_Price}}</td>
+			<td><button onclick="deletePhones({{SKU}})">Delete</button></td>
+			<td><a href="/phones/{{SKU}}">Update</a></td>
 			<!-- TODO: function to view that phone  -->
 			<!-- <td><button onclick="">Update</button></td>		 -->
 		</tr>

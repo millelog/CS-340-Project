@@ -50,7 +50,9 @@
 
 	<h3>Display Customers:</h3>
 	<!--  display table of customers-->
-	<table class="table">
+	<div id="table-wrapper" style="position: relative">
+		<div id="table-scroll">
+			<table class="table">
 		<thead>
 			<th scope="col">Name</th>
 			<th scope="col">Email Address</th>
@@ -70,6 +72,9 @@
 			{{/each}}
 		</tbody>
 	</table>
+		</div>
+	</div>
+	
 
 
 </html>
