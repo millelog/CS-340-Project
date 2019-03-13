@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mysql = require('./dbcon.js');
 
-var PORT = 8849;
+var PORT = 8008;
 
 //handlebars middleware
 app.engine('handlebars', handlebars.engine);
