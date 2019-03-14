@@ -2,6 +2,22 @@ module.exports = function(){
 	var express = require('express');
 	var router = express.Router();
 
+		/*
+			function gets single phone and returns its attributes
+		*/
+		function getSinglePhone(res,mysql,context,SKU,complete){
+			var sql = "SELECT SKU, Manufacturer, Model, Phone_Name, Phone_Price FROM Phones_Infos WHERE SKU = ?";
+			var inserts = [SKU];
+
+			mysql.pool.query(sql,inserts,(error,results,fields)=>{
+				if(error){
+					res.write(JSON.stringify(error));
+					res.end();
+				}
+				context.phone = results[0];
+				complete();
+			});
+		}
 
 		/*
 			function gets phones from db
@@ -17,14 +33,34 @@ module.exports = function(){
 			});
 		}
 
+		/*
+			route to render update-phone phage
+		*/
+		router.get('/:SKU', (req,res)=>{
+			callbackCount = 0;
+			var context = {};
+			context.jsscripts = ["updatephones.js"]
+
+			var mysql = req.app.get('mysql');
+			getSinglePhone(res,mysql,context,req.params.SKU,complete);
+
+			function complete(){
+				callbackCount++;
+				if(callbackCount >=1){
+					res.render('update-phones', context);
+				}
+			}
+
+		});
+
 
 		/*
-			function renders phones.handlebars
+			route renders phones.handlebars
 		*/
 		router.get('/', (req,res)=>{
 			var callbackCount = 0;
 			var context = {};		//object that will store sql results
-			context.jsscripts = ["deletephones.js"];
+			context.jsscripts = ["deletephones.js","updatephones.js"];
 
 			var mysql = req.app.get('mysql');
 			
@@ -63,14 +99,14 @@ module.exports = function(){
 		});
 
 		/*
-			
+			route updates the attributes passed in inserts
 		*/
 		router.put('/:SKU', (req,res)=>{
         var mysql = req.app.get('mysql');
         console.log(req.body)
-		console.log(req.params.id)	
-		var sql = "UPDATE Phones_Infos SET SKU=?,Manufacturer=?,Model=?,Phone_Name=?,Phone_Price=? WHERE SKU =?";
-		var inserts = [req.body.SKU, req.body.Manufacturer, req.body.Model, req.body.Name, req.body.Price];
+		console.log(req.params.SKU)	
+		var sql = "UPDATE Phones_Infos SET Manufacturer=?,Model=?,Phone_Name=?,Phone_Price=? WHERE SKU =?";
+		var inserts = [req.body.Manufacturer, req.body.Model, req.body.Phone_Name, req.body.Phone_Price, req.params.SKU];
 			sql = mysql.pool.query(sql, inserts, (error, results, fields)=>{
 				if(error){
 		            console.log(error)
