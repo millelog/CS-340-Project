@@ -34,27 +34,6 @@ module.exports = function(){
 		}
 
 		/*
-			route to render update-phone phage
-		*/
-		router.get('/:SKU', (req,res)=>{
-			callbackCount = 0;
-			var context = {};
-			context.jsscripts = ["updatephones.js"]
-
-			var mysql = req.app.get('mysql');
-			getSinglePhone(res,mysql,context,req.params.SKU,complete);
-
-			function complete(){
-				callbackCount++;
-				if(callbackCount >=1){
-					res.render('update-phones', context);
-				}
-			}
-
-		});
-
-
-		/*
 			route renders phones.handlebars
 		*/
 		router.get('/', (req,res)=>{
@@ -76,6 +55,29 @@ module.exports = function(){
 		});
 
 		/*
+			route to render update-phone page
+		*/
+		router.get('/:SKU', (req,res)=>{
+			callbackCount = 0;
+			var context = {};
+			context.jsscripts = ["updatephones.js"]
+
+			var mysql = req.app.get('mysql');
+			getSinglePhone(res,mysql,context,req.params.SKU,complete);
+
+			function complete(){
+				callbackCount++;
+				if(callbackCount >=1){
+					res.render('update-phones', context);
+				}
+			}
+
+		});
+
+
+
+
+		/*
 			function adds a new phone, redirects to phones page after adding
 		*/
 		router.post('/', (req,res)=>{
@@ -95,7 +97,6 @@ module.exports = function(){
 					res.redirect('/phones');
 				}
 			});  
-
 		});
 
 		/*
