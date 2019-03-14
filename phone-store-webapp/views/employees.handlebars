@@ -18,7 +18,7 @@
 		<div class="form-group">
 			Store: <select name="Store_ID">
 				{{#each stores}}
-				<option value = "{{id}}">{{id}}</option>
+				<option value = "{{id}}">{{employee.Store_ID}}</option>
 				{{/each}}
 			</select><br>
 		</div>
@@ -46,20 +46,24 @@
 
 <table class="table">
 		<thead>
+			<th scope="col">ID</th>
 			<th scope="col">Name</th>
 			<th scope="col">Store ID</th>
 			<th scope="col">Phone Number</th>
 			<th scope="col">Street Address</th>
 			<th scope="col">Zip Code</th>
+			<th scope="col">Update</th>
 		</thead>
 		<tbody>
 			{{#each employees}}
 			<tr>
+				<td>{{Emp_ID}}</td>
 				<td>{{Emp_Name}}</td>
 				<td>{{Store_ID}}</td>
 				<td>{{Emp_Phone_Number}}</td>
 				<td>{{Emp_Address_Street}}</td>
-				<td>{{Emp_Address_Zip}}</td>		
+				<td>{{Emp_Address_Zip}}</td>	
+				<td><a href="/employees/{{Emp_ID}}">Update</a></td>	
 			
 			</tr>
 			{{/each}}
