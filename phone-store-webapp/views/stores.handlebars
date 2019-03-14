@@ -34,6 +34,7 @@
 			<th scope="col">Phone Number</th>
 			<th scope="col">Street Address</th>
 			<th scope="col">Zip Code</th>
+			<th scope="col">Update</th>
 		</thead>
 		<tbody>
 			{{#each stores}}
@@ -41,7 +42,8 @@
 				<td>{{Store_ID}}</td>
 				<td>{{Store_Phone_Number}}</td>
 				<td>{{Store_Address_Street}}</td>
-				<td>{{Store_Address_Zip}}</td>		
+				<td>{{Store_Address_Zip}}</td>	
+				<td><a href="/stores/{{Store_ID}}">Update</a></td>	
 			</tr>
 			{{/each}}
 		</tbody>
