@@ -1,0 +1,20 @@
+<html>
+	<h3>Update Plans Information</h3>
+
+	<form id="update-plans" action="/service_plans" method="post">
+		<!-- <div class="form-group">
+				SKU: <input type="number" name="SKU" value="{{phone.SKU}}">
+		</div> -->
+		<div class="form-group">
+				Name: <input type="text" name="Plan_Name" value="{{plan.Plan_Name}}">
+		</div>
+		<div class="form-group">
+				Cost: <input type="number" name="Plan_Cost" value="{{plan.Plan_Cost}}">
+		</div>
+		<div class="form-group">
+				Description: <input type="text" name="Plan_Desc" value="{{plan.Plan_Desc}}">
+		</div>
+	</form>
+			
+		<button onclick="updatePlans({{plan.Plan_ID}})">Update</button>
+</html>	

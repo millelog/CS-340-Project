@@ -34,6 +34,7 @@
 			<th scope="col">Name</th>
 			<th scope="col">Cost</th>
 			<th scope="col">Description</th>
+					<th scope="col">Update</th>
 		</thead>
 		<tbody>
 			{{#each service_plans}}
@@ -42,6 +43,7 @@
 				<td>{{Plan_Name}}</td>
 				<td>{{Plan_Cost}}</td>
 				<td>{{Plan_Desc}}</td>
+				<td><a href="/service_plans/{{Plan_ID}}">Update</a></td>
 			</tr>
 			{{/each}}
 		</tbody>
