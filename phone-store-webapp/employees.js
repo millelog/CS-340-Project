@@ -44,8 +44,55 @@ module.exports = function(){
 		});
 	}
 
+	/*
+	 * This function searchs for all employees that match the fields, puts
+	 * wild cards in for blank ones, and renders employee-search
+	 */
 
 
+	function searchEmployee(res,req,mysql,context,complete){
+	  var possible_inserts = [req.body.Emp_Name_Search, req.body.Store_ID_Search, req.body.Emp_Phone_Number_search, req.body.Emp_Address_Street_Search, req.body.Emp_Address_Zip_Search];
+
+	  /*var sql = 'SELECT * FROM Employees WHERE (Emp_Name LIKE ?) AND (Store_ID LIKE ?) AND (Emp_Phone_Number LIKE ?) AND (Emp_Address_Street LIKE ?) AND (Emp_Address_Zip LIKE ?)';*/
+
+	 var sql = "SELECT * FROM Employees WHERE ";
+	 var inserts = []
+	 possible_inserts.forEach(function(insert, i){
+		  if(insert){
+			inserts.push(insert)
+			switch(i){
+				case 0:
+					sql+="Emp_Name=? AND ";break;
+				case 1:
+					sql+="Store_ID=? AND ";break;
+				case 2:
+					sql+="Emp_Phone_Number=? AND ";break;
+				case 3:
+					sql+="Emp_Address_Street=? AND ";break;
+				case 4:
+					sql +="Emp_Address_Zip=? AND ";break;
+			}
+		  }
+	  });
+	  var explode = sql.split(" ");
+	  explode.pop()
+	  explode.pop()
+	  sql = explode.join(' ')
+
+	  sql = mysql.pool.query(sql, inserts, (error, results, fields)=>{
+			if(error){
+	            console.log(error)
+	            res.write(JSON.stringify(error));
+	            res.end();
+	        }else{
+				context.employees = results;
+				complete();
+			}
+	  });
+	}
+
+
+	
 	/*
 		function renders employees.handlebars
 	*/
@@ -58,8 +105,7 @@ module.exports = function(){
 		
 		getStoreIDs(res,mysql,context,complete);
 		getEmployees(res,mysql,context,complete);
-
-
+		
 		function complete(){
             callbackCount++;
             if(callbackCount >= 2){
@@ -84,7 +130,7 @@ module.exports = function(){
 		getStoreIDs(res,mysql,context,complete);
 
 		getSingleEmployee(res,mysql,context,req.params.Emp_ID,complete);
-
+		
 		function complete(){
 			callbackCount++;
 			if(callbackCount >=2){
@@ -116,8 +162,26 @@ module.exports = function(){
 			}
 		});
 	});
+	
 
+	router.post('/employees_search', (req,res)=>{
+		var callbackCount = 0;
+		var context = {};		//object that will store sql results
+		context.jsscripts = [];
 
+		var mysql = req.app.get('mysql');
+		
+		getStoreIDs(res,mysql,context,complete);	
+	    searchEmployee(res,req,mysql,context,complete);
+
+		function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('employees', context);
+			}
+		}
+		
+	});
 	/*
 		function adds a new employee, redirects to employee page after adding
 	*/
