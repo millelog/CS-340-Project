@@ -16,7 +16,46 @@ module.exports = function() {
 			complete();
 		});
 	}
+	
+    function searchCustomers(res,req,mysql,context,complete){
+      var possible_inserts = [req.body.Cust_Name_Search, req.body.Cust_Email_Search, req.body.Cust_Phone_Number_Search, req.body.Cust_Address_Street_Search, req.body.Cust_Address_Zip_Search];
 
+     var sql = "SELECT * FROM Customers WHERE ";
+     var inserts = []
+     possible_inserts.forEach(function(insert, i){
+          if(insert){
+            inserts.push(insert)
+            switch(i){
+                case 0:
+                    sql+="Cust_Name=? AND ";break;
+                case 1:
+                    sql+="Cust_Email=? AND ";break;
+                case 2:
+                    sql+="Cust_Phone_Number=? AND ";break;
+                case 3:
+                    sql+="Cust_Address_Street=? AND ";break;
+                case 4:
+                    sql +="Cust_Address_Zip=? AND ";break;
+            }
+          }
+      });
+      var explode = sql.split(" ");
+      explode.pop()
+      explode.pop()
+      sql = explode.join(' ')
+
+      sql = mysql.pool.query(sql, inserts, (error, results, fields)=>{
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                context.customers = results;
+                complete();
+            }
+      });
+	}
+    	
 	/*
 		function renders customers.handlebars
 	*/
@@ -59,6 +98,23 @@ module.exports = function() {
 		});
 	});
 
+	
+    router.post('/customer_search', (req,res)=>{
+        var callbackCount = 0;
+        var context = {};       //object that will store sql results
+        context.jsscripts = [];
 
+        var mysql = req.app.get('mysql');
+
+        searchCustomers(res,req,mysql,context,complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('customers', context);
+            }
+        }
+
+    });
 	return router;
 }();
