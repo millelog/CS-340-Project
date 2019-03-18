@@ -1,0 +1,129 @@
+
+
+<div>
+  <p> This page allows you to create a new order based on the existing database </p>
+  <br>
+  <form action="/orders" method="post">
+	  <div class="form-group">
+		  IMEI: <input type="number" name="IMEI">
+	  </div>
+	  <div class="form-group">
+		  Customer ID: <input type="number" name="Cust_ID">
+	  </div>
+	  <div class="form-group">
+		  Service Plan ID: <input type="number" name="Plan_ID">
+	  </div>
+
+	  <div class="form-group">
+		  Employee ID: <input type="number" name="Emp_ID">
+	  </div>
+	  	  <div class="form-group">
+		  Date: <input type="date" name="Order_Date">
+	  </div>
+	  <button type="submit" class="btn btn-default">Create Order</button>
+  <br>
+  <!--display phones in db -->
+    <h3>Available Phones</h3>
+	<table class="table">
+    <thead >
+		<th scope="col">IMEI</th>
+        <th scope="col">SKU</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Model</th>
+        <th scope="col">Phone Name</th>
+        <th scope="col">Phone Price</th>
+    </thead>
+    <tbody>
+        {{#each phones}}
+        <tr>
+			<td>{{IMEI}}</td>
+            <td>{{SKU}}</td>
+            <td>{{Manufacturer}}</td>
+            <td>{{Model}}</td>
+            <td>{{Phone_Name}}</td>
+            <td>{{Phone_Price}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+	</table>
+	<br>
+	 <h3>Customers:</h3>
+    <!--  display table of customers-->
+    <div id="table-wrapper" style="position: relative">
+        <div id="table-scroll">
+            <table class="table">
+        <thead>
+            <th scope="col">Customer ID</th>
+			<th scope="col">Name</th>
+            <th scope="col">Email Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Street Address</th>
+            <th scope="col">Zip Code</th>
+        </thead>
+        <tbody>
+            {{#each customers}}
+            <tr>
+				<td>{{Cust_ID}}</td>
+                <td>{{Cust_Name}}</td>
+                <td>{{Cust_Email}}</td>
+                <td>{{Cust_Phone_Number}}</td>
+                <td>{{Cust_Address_Street}}</td>
+                <td>{{Cust_Address_Zip}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+        </div>
+    </div>
+	<br>
+	<!-- display service plans -->
+
+<h4>Service Plans</h4>
+
+<table class="table">
+        <thead>
+            <th scope="col">Plan ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Description</th>
+        </thead>
+        <tbody>
+            {{#each service_plans}}
+            <tr>
+                <td>{{Plan_ID}}</td>
+                <td>{{Plan_Name}}</td>
+                <td>{{Plan_Cost}}</td>
+                <td>{{Plan_Desc}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+<!-- display employees -->
+<h3>Employees</h3>
+
+<table class="table">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Store ID</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Street Address</th>
+            <th scope="col">Zip Code</th>
+        </thead>
+        <tbody>
+            {{#each employees}}
+            <tr>
+                <td>{{Emp_ID}}</td>
+                <td>{{Emp_Name}}</td>
+                <td>{{Store_ID}}</td>
+                <td>{{Emp_Phone_Number}}</td>
+                <td>{{Emp_Address_Street}}</td>
+                <td>{{Emp_Address_Zip}}</td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>	
