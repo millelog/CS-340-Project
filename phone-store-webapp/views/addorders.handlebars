@@ -1,0 +1,20 @@
+<html>
+	<h3>Add Order for {{Cust_Name}}</h3>
+	<form id="addOrder" action="/orders" method="post">
+		<!-- emp_id //who is selling to customer -->
+		Enter your employee ID: <input type="number" name="Emp_ID" required="true">
+
+		<!-- what phone are we selling to customer -->
+		Enter phone SKU: <input type="number" name="SKU" required> IMEI: <input type="number" name="IMEI">
+
+		<!-- optional, cust does not have to purchase service plan -->
+		Optional: Service plan: <select name="servicePlan">
+			{{#each plans}}
+			<option value ={{Plan_ID}}>{{Plan_Name}}</option>
+			{{/each}}
+		</select>
+
+		<!-- date -->
+		Date: <input type="date" name="Order_Date">
+		<input type="submit" value="Submit">
+	</form>
